@@ -5,11 +5,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/todo", () => {
-  res.send("Hello World!");
-});
-
 let database = [];
+
+app.get("/todo", () => {
+  return res.json(database);
+});
 
 app.post("/todo", (req, res) => {
   database.push({ ...req.body, id: database.length + 1 });
@@ -19,6 +19,13 @@ app.post("/todo", (req, res) => {
 app.delete("/todo/:id", (req, res) => {
   const { id } = req.params;
   database = database.filter((todo) => todo.id !== Number(id));
+  return res.json(database);
+});
+
+app.put("/todo/:id", (req, res) => {
+  const { id } = req.params;
+  const findIdx = database.findIndex((todo) => todo.id === Number(id));
+  database[findIdx] = { ...database[findIdx], ...req.body };
   return res.json(database);
 });
 
