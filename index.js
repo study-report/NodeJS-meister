@@ -9,10 +9,16 @@ app.get("/todo", () => {
   res.send("Hello World!");
 });
 
-const database = [];
+let database = [];
 
 app.post("/todo", (req, res) => {
   database.push({ ...req.body, id: database.length + 1 });
+  return res.json(database);
+});
+
+app.delete("/todo/:id", (req, res) => {
+  const { id } = req.params;
+  database = database.filter((todo) => todo.id !== Number(id));
   return res.json(database);
 });
 
