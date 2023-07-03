@@ -9,10 +9,11 @@ app.get("/todo", () => {
   res.send("Hello World!");
 });
 
+const database = [];
+
 app.post("/todo", (req, res) => {
-  const data = req.body;
-  console.log(data);
-  return res.json(data);
+  database.push({ ...req.body, id: database.length + 1 });
+  return res.json(database);
 });
 
 app.listen(3001);
