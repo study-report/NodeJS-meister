@@ -24,8 +24,8 @@ app.delete("/todo/:id", (req, res) => {
 
 app.put("/todo/:id", (req, res) => {
   const { id } = req.params;
-  const findIdx = database.findIndex((todo) => todo.id === Number(id));
-  database[findIdx] = { ...database[findIdx], ...req.body };
+  const foundIdx = database.findIndex((todo) => todo.id === Number(id));
+  database[foundIdx] = { ...database[foundIdx], ...req.body };
   return res.json(database);
 });
 
