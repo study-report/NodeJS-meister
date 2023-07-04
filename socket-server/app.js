@@ -7,8 +7,8 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (client) => {
-  client.on("chat", (data) => {
-    client.broadcast.emit("chat", data);
+  client.on("chat", (message) => {
+    client.broadcast.emit("chat", message);
   });
   client.on("disconnect", () => {});
 });
