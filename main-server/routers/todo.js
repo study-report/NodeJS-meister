@@ -29,7 +29,6 @@ router.put("/:id", async (req, res) => {
     `UPDATE todo SET todo = ?, completed = ? WHERE id = ?;`,
     [todo, completed, id]
   );
-
   return res.json("성공");
 });
 
